@@ -30,7 +30,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Center(child: Text("my tickets"))),
         body: appScreens[_seletedIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _seletedIndex,

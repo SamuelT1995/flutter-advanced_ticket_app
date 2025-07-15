@@ -1,4 +1,4 @@
 class AppMedia {
   static const _baseImage = "assets/images/";
-  static const logo = "$_baseImage/logo.png";
+  static const logo = "assets/images/logo.png";
 }
