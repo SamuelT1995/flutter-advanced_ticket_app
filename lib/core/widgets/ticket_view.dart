@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/core/res/styles/app_styles.dart';
+import 'package:ticket_app/core/utils/all_json.dart';
 import 'package:ticket_app/core/widgets/app_column_text_layout.dart';
 import 'package:ticket_app/core/widgets/app_layoutbuilder_widget.dart';
 import 'package:ticket_app/core/widgets/big_circle.dart';
@@ -8,7 +9,9 @@ import 'package:ticket_app/core/widgets/text_style_fourth.dart';
 import 'package:ticket_app/core/widgets/text_style_third.dart';
 
 class TicketView extends StatelessWidget {
-  const TicketView({super.key});
+  final bool wholeScreen;
+  final Map<String, dynamic> ticket;
+  const TicketView({super.key, required this.ticket, this.wholeScreen = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class TicketView extends StatelessWidget {
       width: size.width * 0.85,
       height: 189,
       child: Container(
-        margin: EdgeInsets.only(right: 16),
+        margin: EdgeInsets.only(right: wholeScreen == true ? 0 : 16),
         child: Column(
           children: [
             //Blue Part of the container
@@ -36,10 +39,11 @@ class TicketView extends StatelessWidget {
                   //show departure and destination with icons
                   Row(
                     children: [
-                      TextStyleThird(text: "NYC"),
+                      TextStyleThird(text: ticket["from"]["code"]),
 
                       Expanded(child: Container()),
                       BigDot(),
+                      //ticket icon
                       Expanded(
                         child: Stack(
                           children: [
@@ -62,7 +66,7 @@ class TicketView extends StatelessWidget {
 
                       BigDot(),
                       Expanded(child: Container()),
-                      TextStyleThird(text: "LDN"),
+                      TextStyleThird(text: ticket["to"]["code"]),
                     ],
                   ),
                   //show departure and destination with line
@@ -71,17 +75,17 @@ class TicketView extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: 100,
-                        child: TextStyleFourth(text: "NEW YORK"),
+                        child: TextStyleFourth(text: ticket["from"]["name"]),
                       ),
                       Expanded(child: Container()),
-                      TextStyleFourth(text: "08 30 AM"),
+                      TextStyleFourth(text: ticket["flying_time"]),
 
                       Expanded(child: Container()),
                       SizedBox(
                         width: 100,
 
                         child: TextStyleFourth(
-                          text: "LONDON",
+                          text: ticket["to"]["name"],
                           align: TextAlign.end,
                         ),
                       ),
@@ -121,17 +125,17 @@ class TicketView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppColumnTextLayout(
-                        topText: "1 MAY",
+                        topText: ticket["date"],
                         bottomText: "DATE",
                         alignment: CrossAxisAlignment.start,
                       ),
                       AppColumnTextLayout(
-                        topText: "08 00 AM",
+                        topText: ticket["departure_time"],
                         bottomText: "DEPARTURE TIME",
                         alignment: CrossAxisAlignment.center,
                       ),
                       AppColumnTextLayout(
-                        topText: "23",
+                        topText: ticket["number"].toString(),
                         bottomText: "NUMBER",
                         alignment: CrossAxisAlignment.end,
                       ),

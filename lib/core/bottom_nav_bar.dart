@@ -12,54 +12,51 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   final appScreens = [
     const HomeScreen(),
-    Center(child: const Text("Search")),
-    Center(child: const Text("Ticket")),
-    Center(child: const Text("Profile")),
+    const Center(child: Text("Search")),
+    const Center(child: Text("Ticket")),
+    const Center(child: Text("Profile")),
   ];
 
-  int _seletedIndex = 0;
+  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
-      _seletedIndex = index;
+      _selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: appScreens[_seletedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _seletedIndex,
-          onTap: _onItemTapped,
-          selectedItemColor: Colors.blueGrey,
-          unselectedItemColor: const Color(0xFF526400),
-          showSelectedLabels: false,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
-              activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FluentSystemIcons.ic_fluent_search_regular),
-              activeIcon: Icon(FluentSystemIcons.ic_fluent_search_filled),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FluentSystemIcons.ic_fluent_ticket_regular),
-              activeIcon: Icon(FluentSystemIcons.ic_fluent_ticket_filled),
-              label: 'Ticket',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FluentSystemIcons.ic_fluent_person_add_regular),
-              activeIcon: Icon(FluentSystemIcons.ic_fluent_person_add_filled),
-              label: 'Profile',
-            ),
-          ],
-        ),
+    return Scaffold(
+      body: appScreens[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: Colors.blueGrey,
+        unselectedItemColor: const Color(0xFF526400),
+        showSelectedLabels: false,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(FluentSystemIcons.ic_fluent_home_regular),
+            activeIcon: Icon(FluentSystemIcons.ic_fluent_home_filled),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FluentSystemIcons.ic_fluent_search_regular),
+            activeIcon: Icon(FluentSystemIcons.ic_fluent_search_filled),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FluentSystemIcons.ic_fluent_ticket_regular),
+            activeIcon: Icon(FluentSystemIcons.ic_fluent_ticket_filled),
+            label: 'Ticket',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FluentSystemIcons.ic_fluent_person_add_regular),
+            activeIcon: Icon(FluentSystemIcons.ic_fluent_person_add_filled),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }
